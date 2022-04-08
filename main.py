@@ -34,7 +34,7 @@ def get_shop_list_by_dishes(dishes: list, person_count: int) -> dict:
         print("Количество людей не может быть ноль")
         return {}
 
-    # достаём ингридиенты, кол-во умножаем на кол-во персон
+    # достаём ингредиенты, кол-во умножаем на кол-во персон
     shopping_bag = {}
     for dish in dishes:
         ingredients = cook_book[dish]
@@ -42,16 +42,16 @@ def get_shop_list_by_dishes(dishes: list, person_count: int) -> dict:
         if ingredients is None:
             print(f"[-] Блюдо {dish} не в списке")
             continue
-        # Из блюда вытаскиваем ингридиенты из блюда и записываем в список ингридентов для покупок
+        # Из блюда вытаскиваем ингредиенты и записываем в список ингредиентов для покупок
         for ingridient in ingredients:
-            # вычисляем кол-во ингридиента, учитывая, что ингридиенты могут повторяться в разных блюдах
+            # вычисляем кол-во ингредиента, учитывая, что ингредиенты могут повторяться в разных блюдах
             ingridient['quantity'] = int(ingridient['quantity']) * person_count
             quantity = ingridient['quantity']
-            # Если такой ингридиент уже был в списке, то суммируем
+            # Если такой ингредиент уже был в списке, то суммируем
             ingridient_name = ingridient['ingridient_name']
             if ingridient_name in shopping_bag:
                 quantity = quantity + shopping_bag[ingridient_name]['quantity']
-            # записываем в словарь игридиент
+            # записываем в словарь игредиент
             shopping_bag[ingridient_name] = {
                 'measure': ingridient['measure'],
                 'quantity': quantity
