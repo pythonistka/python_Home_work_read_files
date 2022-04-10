@@ -62,6 +62,42 @@ def get_shop_list_by_dishes(dishes: list, person_count: int) -> dict:
 
 
 
+def concat_two_files():
+    file_name1 = "1.txt"
+    with open(file_name1, encoding="utf-8") as file:
+        file1 = file.readlines()
+    file_len1 = len(file1)
+
+    file_name2 = "2.txt"
+    with open(file_name2, encoding="utf-8") as file:
+        file2 = file.readlines()
+    file_len2 = len(file2)
+
+    file_content = []
+    if len(file1) > len(file2):
+        file_content.append(file_name2)
+        file_content.append(file_len2)
+        file_content = file_content + file2
+
+        file_content.append(file_name1)
+        file_content.append(file_len1)
+        file_content = file_content + file1
+    else:
+        file_content.append(file_name1)
+        file_content.append(file_len1)
+        file_content = file_content + file1
+
+        file_content.append(file_name2)
+        file_content.append(file_len2)
+        file_content = file_content + file2
+
+    result_file_name = "result.txt"
+    file = open(result_file_name, encoding="utf-8", mode="w")
+    for line in file_content:
+        line = str(line).strip() + "\n"
+        file.write(line)
+        print(line)
+    file.close()
 
 
 print("[1] Читаем словарь с рецептами из файла")
@@ -71,3 +107,6 @@ pprint(cook_book)
 print("\n[2] Выводим список покупок")
 shop_list = get_shop_list_by_dishes(['Омлет', 'Фахитос'], 2)
 pprint(shop_list)
+
+print("\n[3] Записываем файл")
+result = concat_two_files()
